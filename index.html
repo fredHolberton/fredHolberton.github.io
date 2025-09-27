@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Portfolio</title>
-    <link rel="stylesheet" href="assets/styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
@@ -24,6 +23,7 @@
         <nav class="header-right">
             <ul class="nav-list">
                 <li class="nav-item"><a href="#" class="nav-link active" data-page="home">Home</a></li>
+                <li class="nav-item"><a href="#" class="nav-link active" data-page="portfolio">Portfolio</a></li>
                 <li class="nav-item"><a href="#" class="nav-link" data-page="about">About Me</a></li>
                 <li class="nav-item"><a href="#" class="nav-link" data-page="contact">Contact</a></li>
             </ul>
@@ -37,29 +37,45 @@
 
     <!-- Script pour charger le contenu dynamique -->
     <script>
+        // Fonction pour activer les cards du portfolio
+        function enableProjectCards() {
+            document.querySelectorAll(".project-card[data-page]").forEach(card => {
+                card.addEventListener("click", () => {
+                    const page = card.getAttribute("data-page");
+                    loadPage(page);
+                    window.location.hash = page; // permet de partager l'URL
+                });
+            });
+        }
+
         // Fonction pour charger le contenu d'une page
         function loadPage(page) {
             fetch(`assets/${page}.html`)
                 .then(response => response.text())
                 .then(html => {
-                    document.getElementById('dynamic-content').innerHTML = html;
+                    const content = document.getElementById('dynamic-content');
+                    content.innerHTML = html;
 
-                    // Mettre à jour le lien actif dans le menu
+                    // Réactiver les cards si on est sur le portfolio
+                    if (page === "portfolio") {
+                        enableProjectCards();
+                    }
+
+                    // Mettre à jour le lien actif
                     document.querySelectorAll('.nav-link').forEach(link => {
                         link.classList.remove('active');
                     });
-                    document.querySelector(`.nav-link[data-page="${page}"]`).classList.add('active');
+                    const activeLink = document.querySelector(`.nav-link[data-page="${page}"]`);
+                    if (activeLink) {
+                        activeLink.classList.add('active');
+                    }
                 })
                 .catch(error => {
-                    console.error('Erreur lors du chargement de la page:', error);
-                    document.getElementById('dynamic-content').innerHTML = '<p>Erreur lors du chargement de la page.</p>';
+                    console.error("Erreur lors du chargement de la page:", error);
+                    document.getElementById("dynamic-content").innerHTML =
+                        "<p>Erreur lors du chargement de la page.</p>";
                 });
         }
-
-        // Charger la page "home" par défaut
-        document.addEventListener('DOMContentLoaded', () => {
-            loadPage('home');
-        });
 
         // Écouter les clics sur les liens du menu
         document.querySelectorAll('.nav-link').forEach(link => {
@@ -71,4 +87,11 @@
         });
     </script>
 </body>
+
+<script>
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = "assets/styles.css?v=" + new Date().getTime();
+    document.head.appendChild(link);
+</script>
 </html>

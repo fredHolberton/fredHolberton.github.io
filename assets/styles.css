@@ -5,11 +5,34 @@
     box-sizing: border-box;
 }
 
+a {
+    color: #1e90ff; /* Liens bleus visibles */
+}
+
 body {
-    font-family: 'Poppins', sans-serif;
-    background-color: #f8f9fa;
-    color: #333;
-    line-height: 1.6;
+  margin: 0;
+  background-color: #000;
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.6;
+}
+
+h1 {
+  font-size: 2em;
+  margin-bottom: 20px;
+  color: #ffffff;
+}
+
+h2 {
+  font-size: 1.5em;
+  margin-top: 30px;
+  margin-bottom: 15px;
+  color: blue;
+}
+
+p {
+  margin-bottom: 15px;
+  color: #acaaaa;
 }
 
 /* Header */
@@ -17,12 +40,13 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 50px;
-    background-color: #ffffff;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px 20px;
+    background-color: #111; /* légèrement plus clair que le body */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.5); /* ombre douce */
     position: sticky;
     top: 0;
     z-index: 1000;
+    color: #ffffff;
 }
 
 .header-left {
@@ -47,7 +71,7 @@ body {
 .name h1 {
     font-size: 1.5rem;
     font-weight: 600;
-    color: #333;
+    color: #ffffff;
 }
 
 .header-right .nav-list {
@@ -58,7 +82,7 @@ body {
 
 .header-right .nav-link {
     text-decoration: none;
-    color: #555;
+    color: #ffffff;
     font-weight: 500;
     transition: color 0.3s;
     position: relative;
@@ -89,11 +113,19 @@ body {
     width: 100%;
 }
 
-/* Contenu dynamique */
-.content {
-    padding: 50px;
-    min-height: calc(100vh - 100px);
+main.content {
+    width: 60%;
+    margin: 0 auto;
+    padding: 20px;
 }
+
+/* Sur les petits écrans (<768px), le contenu prend toute la largeur */
+@media (max-width: 768px) {
+    main.content {
+        width: 90%;   /* quasi pleine largeur */
+    }
+}
+
 
 /* Responsive */
 @media (max-width: 768px) {
@@ -111,18 +143,6 @@ body {
 	.header-right .nav-list {
 			gap: 20px;
 	}
-
-	.content {
-			padding: 30px 20px;
-	}
-}
-
-/* Alignement à gauche pour les titres et les cards */
-h1, h2 {
-    text-align: left; /* Alignement à gauche */
-    margin: 20px 50px; /* Marge à gauche et à droite */
-    display: block;
-    color: #333; /* Couleur du texte */
 }
 
 /* Conteneur des projets */
@@ -131,15 +151,14 @@ h1, h2 {
     flex-wrap: wrap;
     justify-content: flex-start; /* Alignement à gauche */
     gap: 30px; /* Espacement entre les cards */
-    padding: 20px 50px; /* Marge à gauche */
 }
 
 /* Style des cards */
 .project-card {
     width: calc(50% - 15px); /* 50% de la largeur moins la moitié du gap */
-    min-width: 350px; /* Largeur minimale pour éviter que les cards soient trop petites */
+    min-width: 300px; /* Largeur minimale pour éviter que les cards soient trop petites */
     background-color: #ffffff;
-    border-radius: 10px;
+    border-radius: 20px;
     overflow: hidden;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s, box-shadow 0.3s;
@@ -148,7 +167,7 @@ h1, h2 {
 /* Image du projet */
 .project-image {
     width: 100%;
-    height: 250px; /* Augmente la hauteur de l'image */
+    height: 300px; /* Augmente la hauteur de l'image */
     background-size: cover;
     background-position: center;
 }
@@ -169,34 +188,15 @@ h1, h2 {
 }
 
 /* Responsive pour les petits écrans */
-@media (max-width: 800px) {
+@media (max-width: 780px) {
     .project-card {
         width: 100%; /* Une card par ligne sur mobile */
     }
 }
 
-
 /* Styles spécifiques pour les contacts */
 .contact-content {
-        max-width: 800px;
-        margin: 0 auto;
         text-align: left;
-}
-
-.contact-content h2 {
-        font-size: 2rem;
-        margin-bottom: 20px;
-		text-align: left; /* Alignement à gauche */
-		margin: 20px 50px; /* Marge à gauche et à droite */
-        color: #333;
-}
-
-.contact-content p {
-        font-size: 1.1rem;
-        color: #666;
-        margin-bottom: 20px;
-		text-align: left; /* Alignement à gauche */
-		margin: 20px 50px; /* Marge à gauche et à droite */
 }
 
 .contact-links {
@@ -230,22 +230,12 @@ h1, h2 {
         font-size: 1.5rem;
 }
 
-
-/* Style spécifique pour la page about me */
-.about-content {
-        max-width: 70%;
-        margin: 20px 100px; /* Marge à gauche et à droite */
-        text-align: left;
-}
-
-.about-content h2 {
-        font-size: 2rem;
-        margin-bottom: 20px;
-        color: #333;
-}
-
-.about-content p {
-        font-size: 1.1rem;
-        color: #666;
-        margin-bottom: 15px;
+.project-image-large {
+    display: block;         /* pour pouvoir centrer */
+    max-width: 100%;        /* ne jamais dépasser le conteneur */
+    width: 100%;            /* occupe tout l’espace dispo dans main */
+    height: auto;           /* conserve le ratio */
+    margin: 0 auto 20px;    /* centre + espace en bas */
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.6);
 }

@@ -1,0 +1,38 @@
+<h1>Welcome to my portfolio!</h1>
+<div class="projects">
+    <div class="project-card" data-page="lea-benevoles">
+        <div class="project-image" style="background-image: url('assets/projetLea.png');"></div>
+        <div class="project-label">Léa Bénévoles</div>
+    </div>
+    <div class="project-card" data-page="escape-station">
+        <div class="project-image" style="background-image: url('assets/escapeStation.png');"></div>
+        <div class="project-label">Escape station</div>
+    </div>
+    <div class="project-card">
+        <div class="project-image" style="background-image: url('assets/projet3.jpg');"></div>
+        <div class="project-label">Project 3</div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+            const cards = document.querySelectorAll(".project-card");
+            const content = document.getElementById("dynamic-content");
+
+            cards.forEach(card => {
+                card.addEventListener("click", () => {
+                    const page = card.getAttribute("data-page");
+
+                    fetch(page)
+                    .then(response => response.text())
+                    .then(html => {
+                        content.innerHTML = html;
+                    })
+                    .catch(err => {
+                        content.innerHTML = "<p style='color:red;'>Erreur de chargement</p>";
+                        console.error(err);
+                    });
+                });
+            });
+        });
+</script>
