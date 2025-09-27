@@ -1,0 +1,251 @@
+/* Réinitialisation et base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.profile-picture img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #ffd700;
+    transition: transform 0.3s;
+}
+
+.profile-picture img:hover {
+    transform: scale(1.1);
+}
+
+.name h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #333;
+}
+
+.header-right .nav-list {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+}
+
+.header-right .nav-link {
+    text-decoration: none;
+    color: #555;
+    font-weight: 500;
+    transition: color 0.3s;
+    position: relative;
+}
+
+.header-right .nav-link:hover {
+    color: #ffd700;
+}
+
+.header-right .nav-link.active {
+    color: #ffd700;
+    font-weight: 600;
+}
+
+.header-right .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #ffd700;
+    transition: width 0.3s;
+}
+
+.header-right .nav-link:hover::after,
+.header-right .nav-link.active::after {
+    width: 100%;
+}
+
+/* Contenu dynamique */
+.content {
+    padding: 50px;
+    min-height: calc(100vh - 100px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+	.header {
+			flex-direction: column;
+			gap: 20px;
+			padding: 20px;
+	}
+
+	.header-left {
+			flex-direction: column;
+			text-align: center;
+	}
+
+	.header-right .nav-list {
+			gap: 20px;
+	}
+
+	.content {
+			padding: 30px 20px;
+	}
+}
+
+/* Alignement à gauche pour les titres et les cards */
+h1, h2 {
+    text-align: left; /* Alignement à gauche */
+    margin: 20px 50px; /* Marge à gauche et à droite */
+    display: block;
+    color: #333; /* Couleur du texte */
+}
+
+/* Conteneur des projets */
+.projects {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start; /* Alignement à gauche */
+    gap: 30px; /* Espacement entre les cards */
+    padding: 20px 50px; /* Marge à gauche */
+}
+
+/* Style des cards */
+.project-card {
+    width: calc(50% - 15px); /* 50% de la largeur moins la moitié du gap */
+    min-width: 350px; /* Largeur minimale pour éviter que les cards soient trop petites */
+    background-color: #ffffff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+/* Image du projet */
+.project-image {
+    width: 100%;
+    height: 250px; /* Augmente la hauteur de l'image */
+    background-size: cover;
+    background-position: center;
+}
+
+/* Label du projet */
+.project-label {
+    padding: 15px;
+    text-align: center;
+    font-weight: 600;
+    color: #ffffff;
+    background-color: #333;
+}
+
+/* Effet au survol */
+.project-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive pour les petits écrans */
+@media (max-width: 800px) {
+    .project-card {
+        width: 100%; /* Une card par ligne sur mobile */
+    }
+}
+
+
+/* Styles spécifiques pour les contacts */
+.contact-content {
+        max-width: 800px;
+        margin: 0 auto;
+        text-align: left;
+}
+
+.contact-content h2 {
+        font-size: 2rem;
+        margin-bottom: 20px;
+		text-align: left; /* Alignement à gauche */
+		margin: 20px 50px; /* Marge à gauche et à droite */
+        color: #333;
+}
+
+.contact-content p {
+        font-size: 1.1rem;
+        color: #666;
+        margin-bottom: 20px;
+		text-align: left; /* Alignement à gauche */
+		margin: 20px 50px; /* Marge à gauche et à droite */
+}
+
+.contact-links {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        margin-top: 20px;
+}
+
+.contact-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        color: #333;
+        text-decoration: none;
+        font-size: 1.2rem;
+        padding: 10px 20px;
+        background-color: #f0f0f0;
+        border-radius: 5px;
+        transition: all 0.3s;
+}
+
+.contact-link:hover {
+        background-color: #ffd700;
+        color: #333;
+        transform: translateY(-2px);
+}
+
+.contact-link i {
+        font-size: 1.5rem;
+}
+
+
+/* Style spécifique pour la page about me */
+.about-content {
+        max-width: 70%;
+        margin: 20px 100px; /* Marge à gauche et à droite */
+        text-align: left;
+}
+
+.about-content h2 {
+        font-size: 2rem;
+        margin-bottom: 20px;
+        color: #333;
+}
+
+.about-content p {
+        font-size: 1.1rem;
+        color: #666;
+        margin-bottom: 15px;
+}

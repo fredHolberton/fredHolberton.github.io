@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <link rel="stylesheet" href="assets/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header commun à toutes les pages -->
+    <header class="header">
+        <div class="header-left">
+            <div class="profile-picture">
+                <img src="assets/photo-profile.png" alt="Profile picture">
+            </div>
+            <div class="name">
+                <h1>Fred URBANI</h1>
+            </div>
+        </div>
+        <nav class="header-right">
+            <ul class="nav-list">
+                <li class="nav-item"><a href="#" class="nav-link active" data-page="home">Home</a></li>
+                <li class="nav-item"><a href="#" class="nav-link" data-page="about">About Me</a></li>
+                <li class="nav-item"><a href="#" class="nav-link" data-page="contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Conteneur pour le contenu dynamique -->
+    <main id="dynamic-content" class="content">
+        <!-- Le contenu sera chargé ici via JavaScript -->
+    </main>
+
+    <!-- Script pour charger le contenu dynamique -->
+    <script>
+        // Fonction pour charger le contenu d'une page
+        function loadPage(page) {
+            fetch(`assets/${page}.html`)
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('dynamic-content').innerHTML = html;
+
+                    // Mettre à jour le lien actif dans le menu
+                    document.querySelectorAll('.nav-link').forEach(link => {
+                        link.classList.remove('active');
+                    });
+                    document.querySelector(`.nav-link[data-page="${page}"]`).classList.add('active');
+                })
+                .catch(error => {
+                    console.error('Erreur lors du chargement de la page:', error);
+                    document.getElementById('dynamic-content').innerHTML = '<p>Erreur lors du chargement de la page.</p>';
+                });
+        }
+
+        // Charger la page "home" par défaut
+        document.addEventListener('DOMContentLoaded', () => {
+            loadPage('home');
+        });
+
+        // Écouter les clics sur les liens du menu
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', (event) => {
+                event.preventDefault();
+                const page = link.getAttribute('data-page');
+                loadPage(page);
+            });
+        });
+    </script>
+</body>
+</html>
