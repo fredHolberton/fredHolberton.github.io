@@ -85,6 +85,15 @@
                 loadPage(page);
             });
         });
+
+        window.addEventListener("DOMContentLoaded", () => {
+            const hash = window.location.hash.replace("#", ""); // si URL contient un hash
+            if (hash) {
+                loadPage(hash); // charge la page correspondant au hash
+            } else {
+                loadPage("home"); // sinon charge home.html par défaut
+            }
+        });
     </script>
 </body>
 
